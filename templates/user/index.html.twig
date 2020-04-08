@@ -1,0 +1,59 @@
+{% extends 'medewerker.html.twig' %}
+
+{% block menu %}
+    <li><a href="{{ path('activiteitenoverzicht') }}">home</a></li>
+    <li class="active"><a href="{{ path('beheer') }}"><span class="badge">{{ activiteiten|length }}</span>beheer</a></li>
+    <li><a href="{{ path('user_index') }}"><span class="badge"></span>beheer users</a></li>
+{% endblock %}
+
+{% block body %}
+<section >
+    <table class="table" style="table-layout: fixed">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Email</th>
+                <th>Voorletters</th>
+                <th>Tussenvoegsel</th>
+                <th>Achternaam</th>
+                <th>Adres</th>
+                <th>Postcode</th>
+                <th>Woonplaats</th>
+                <th>Telefoon</th>
+                <th>bekijken</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.voorletters }}</td>
+                <td>{{ user.tussenvoegsel }}</td>
+                <td>{{ user.achternaam }}</td>
+                <td>{{ user.adres }}</td>
+                <td>{{ user.postcode }}</td>
+                <td>{{ user.woonplaats }}</td>
+                <td>{{ user.telefoon }}</td>
+                <td title="bekijk de gegevens van deze user">
+
+
+                    <a href="{{ path('user_show', {'id': user.id}) }}" >
+                        <span class="glyphicon glyphicon-pencil" style="color:red"></span>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+{% endblock %}
